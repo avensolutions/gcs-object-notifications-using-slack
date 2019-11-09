@@ -12,7 +12,7 @@ data "google_client_config" "current" {}
 # Render Cloud Function source code template to include Slack Webhook URL
 #
   
-resource "template_file" "templated_code" {
+data "template_file" "templated_code" {
   template = "${file("${path.module}/function_source_code/main.py.tpl")}"
   vars = {
     slack_webhook_url = "${var.slack_webhook_url}"
@@ -57,7 +57,7 @@ resource "google_cloudfunctions_function" "function" {
 	source_archive_bucket = "${var.source_archive_bucket}"
 	source_archive_object = "${google_storage_bucket_object.source_archive_object.name}"
 	entry_point = "gcs_slack_notification"
-	event_trigger = {
+	event_trigger {
 		event_type = "${var.event_type}"
 		resource = "${var.resource}"
 	}
