@@ -38,13 +38,9 @@ data "archive_file" "gcs_slack_notification_function_zip" {
 # Deploy Cloud Function
 #
  
-resource "google_storage_bucket" "source_archive_bucket" {
-  name = "${var.source_archive_bucket}"
-}
-
 resource "google_storage_bucket_object" "source_archive_object" {
   name   = "gcs_slack_notification_function.zip"
-  bucket = "${google_storage_bucket.source_archive_bucket.name}"
+  bucket = "${var.source_archive_bucket}"
   source = "${path.module}/gcs_slack_notification_function.zip"
 }
 
