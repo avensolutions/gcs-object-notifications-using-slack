@@ -52,7 +52,7 @@ resource "google_cloudfunctions_function" "function" {
 	name = "gcs-slack-notification-demo"
 	runtime = "python37"
 	description = "Triggers a Slack notification for new objects being created"
-	available_memory_mb = "128MB"
+	available_memory_mb = "128"
 	timeout = 60
 	source_archive_bucket = "${var.source_archive_bucket}"
 	source_archive_object = "${google_storage_bucket_object.source_archive_object.name}"
