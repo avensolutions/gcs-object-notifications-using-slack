@@ -20,7 +20,7 @@ data "template_file" "templated_code" {
 }
 
 resource "local_file" "output_file" {
-    content     = "${template_file.templated_code.rendered}"
+    content     = "${data.template_file.templated_code.rendered}"
     filename = "${path.module}/templated_function_source_code/main.py"
 }
 
